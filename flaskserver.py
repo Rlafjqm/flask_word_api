@@ -14,7 +14,7 @@ nltk.download('omw-1.4')
 app = Flask(__name__)
 
 # OpenAI API 키 설정 (🔴 본인의 API 키 입력 🔴)
-OPENAI_API_KEY = "sk-XXXXXXXXXXXXXXXXXXXXXXXX"
+OPENAI_API_KEY = "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"
 
 def call_openai_api(prompt):
     """ OpenAI API 호출 함수 """
