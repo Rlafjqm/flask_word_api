@@ -1,3 +1,4 @@
+import os
 import requests
 import openai
 import pandas as pd
@@ -6,6 +7,10 @@ import pyttsx3
 import nltk
 from nltk.corpus import wordnet
 from flask import Flask, request, send_file, jsonify
+from dotenv import load_dotenv
+
+# 환경 변수 로드
+load_dotenv()
 
 # NLTK 데이터 다운로드 (한 번만 실행하면 됨)
 nltk.download('wordnet')
@@ -13,8 +18,8 @@ nltk.download('omw-1.4')
 
 app = Flask(__name__)
 
-# OpenAI API 키 설정 (🔴 본인의 API 키 입력 🔴)
-OPENAI_API_KEY = "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"
+# OpenAI API 키 가져오기 (환경 변수 사용)
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 def call_openai_api(prompt):
     """ OpenAI API 호출 함수 """
@@ -22,7 +27,7 @@ def call_openai_api(prompt):
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
-        api_key=OPENAI_API_KEY
+        api_key=OPENAI_API_KEY  # 🔥 이제 환경 변수에서 키를 가져옴
     )
     return response["choices"][0]["message"]["content"]
 
