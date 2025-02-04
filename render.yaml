@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: flask-word-api
+    env: python
+    buildCommand: 
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+    startCommand: gunicorn -w 4 -b 0.0.0.0:5000 flaskserver:app
+    pythonVersion: "3.9"
